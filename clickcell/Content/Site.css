@@ -1,0 +1,104 @@
+﻿html {
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+
+body {
+  background: #3A3A4D;
+  margin:15px;
+  padding: 0px;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #efefef;
+  font-weight: normal;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+p {
+  color: #efefef;
+  line-height:0px
+}
+nav {
+  line-height:0px
+}
+
+a:hover {
+  color: yellowgreen;
+  border-color: yellowgreen;
+}
+
+a a:hover, a:visited, a:link, a:active
+{
+    color: #efefef;
+    text-decoration: none;
+    line-height:0px
+}
+
+button {
+  padding: 12px 30px;
+  box-shadow: none;
+  border: none;
+  color: #efefef;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+button:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+  color: yellowgreen;
+}
+button:focus {
+  outline: none;
+}
+
+#list {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 250px;
+  width: 100%;
+  width: 0;
+  position: relative;
+  display: block;
+  margin-top: 15px;
+}
+
+.tile {
+  display: block;
+  position: absolute;
+  background-color: yellowgreen;
+  color: #3A3A4D;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.layout {
+  color: #efefef;
+  margin-bottom: 15px;
+}
+.layout label {
+  margin-right: 15px;
+  cursor: pointer;
+}
+.layout label:hover {
+  color: yellowgreen;
+}
+.layout input {
+  margin-right: 3px;
+}
+
+#clickcelllogo {
+        float: left;
+		width:200px;
+        margin-right:40px;
+	}
+#navigator {
+  color: #efefef;
+  margin-bottom: 15px;
+	}
+#menu {
+  color: #efefef;
+  margin-bottom: 15px;
+	}
