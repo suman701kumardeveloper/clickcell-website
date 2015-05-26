@@ -3,7 +3,6 @@
 // GRID OPTIONS
 var rowSize = 100;
 var colSize = 100;
-var sizeMultiplier = 2; // define the size of the larger tiles relative to standard tiles
 var gutter = 15;     // Spacing between tiles
 var numTiles = 8;    // Number of tiles to initially populate the grid with
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
