@@ -99,8 +99,6 @@ function createTile() {
         zIndexBoost: false
     });
 
-    // NOTE: Leave rowspan set to 1 because this demo 
-    // doesn't calculate different row heights
     var tile = {
         col: null,
         colspan: colspan,
@@ -229,14 +227,23 @@ function layoutInvalidated(rowToUpdate) {
             col = 0; row++;
         }
 
+        //first row is double height
+        var offset = 0;
+        var rowspan = 1;
+        if (row == 0) 
+            rowspan = 2;
+        else 
+            offset = 1;
+
+
         $.extend(tile, {
             col: col,
             row: row,
             index: index,
             x: col * gutterStep + (col * colSize),
-            y: row * gutterStep + (row * rowSize),
+            y: row * gutterStep + ((row + offset) * rowSize),
             width: tile.colspan * colSize + ((tile.colspan - 1) * gutterStep),
-            height: tile.rowspan * rowSize
+            height: rowspan * rowSize
         });
 
         col += tile.colspan;
