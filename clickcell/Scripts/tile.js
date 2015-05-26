@@ -241,9 +241,9 @@ function layoutInvalidated(rowToUpdate) {
             row: row,
             index: index,
             x: col * gutterStep + (col * colSize),
-            y: row * gutterStep + ((row + offset) * rowSize),
+            y: (row + offset) * gutterStep + ((row + offset) * rowSize),
             width: tile.colspan * colSize + ((tile.colspan - 1) * gutterStep),
-            height: rowspan * rowSize
+            height: rowspan * rowSize + (gutterStep * (rowspan-1))
         });
 
         col += tile.colspan;
