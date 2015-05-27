@@ -40,7 +40,10 @@ p {
 
 #licence {
     font-size: 10%;
-    vertical-align: sub;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+	display: block;
 }
 
 #add {
