@@ -23,7 +23,7 @@ var rowCount = null;
 var gutterStep = null;
 
 var shadow1 = "0 1px 3px  0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.6)";
-var shadow2 = "0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
+var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
 
 $(window).resize(resize);
 $add.click(createTile);
@@ -176,8 +176,6 @@ function createTile() {
           : changePosition(tile.index, tile.lastIndex);
 
         TweenLite.to(element, 0.2, {
-            rotationX: 0,
-            rotationY: 0,
             autoAlpha: 1,
             boxShadow: shadow1,
             scale: 1,
@@ -201,7 +199,7 @@ function layoutInvalidated(rowToUpdate) {
     var height = 0;
     var col = 0;
     var row = 0;
-    var time = 0.35;
+    var time = 0.45;
 
     $(".tile").each(function (index, element) {
 
