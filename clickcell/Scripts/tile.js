@@ -1,8 +1,8 @@
 ﻿//Forked from: http://codepen.io/osublake/pen/RNLdpz/ by Blake Bowen
 
-// GRID OPTIONS
-var rowSize = 120;
-var colSize = 120;
+// GRID OPTIONS : most tiles will need to be 3:2
+var colSize = 180;
+var rowSize = (colSize / 3) * 2;
 var gutter = 15;     // Spacing between tiles
 var numTiles = 8;    // Number of tiles to initially populate the grid with
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
@@ -128,10 +128,10 @@ function createTile() {
         tile.isDragging = true;
         tile.lastIndex = tile.index;
 
-        TweenLite.to(element, 0.2, {
+        TweenLite.to(element, 0.3, {          
             autoAlpha: 0.75,
             boxShadow: shadow2,
-            scale: 0.95,
+            scale: 1.1,
             zIndex: "+=1000"
         });
     }
@@ -176,6 +176,8 @@ function createTile() {
           : changePosition(tile.index, tile.lastIndex);
 
         TweenLite.to(element, 0.2, {
+            rotationX: 0,
+            rotationY: 0,
             autoAlpha: 1,
             boxShadow: shadow1,
             scale: 1,
@@ -227,15 +229,15 @@ function layoutInvalidated(rowToUpdate) {
         }
 
         //first row is double height
+        var rowspan;
         var offset = 0;
-        var rowspan = 1;
         var colspan = tile.colspan;
-        if (row == 0) {
+        if (row == 0) 
             rowspan = colspan = 2;
-        } else {
+        // all other rows will need an offset to accomodate
+        else 
             offset = rowspan = 1;
-        }
-
+        
         $.extend(tile, {
             col: col,
             row: row,
@@ -276,8 +278,7 @@ function layoutInvalidated(rowToUpdate) {
             timeline.fromTo(element, time, from, to, "reflow");
         }
 
-        // Don't animate the tile that is being dragged and
-        // only animate the tiles that have changes
+        // animate tiles being dragged or during position change
         if ((oldRow !== tile.row || oldCol !== tile.col)) {
 
             var duration = newTile ? 0 : time;
@@ -303,8 +304,7 @@ function layoutInvalidated(rowToUpdate) {
     if (row !== rowCount) {
         rowCount = row;
         // top row will be double height
-        height = rowCount * gutterStep + (row * rowSize) + (2 * rowSize);
-        //height = rowCount * gutterStep + (++row * rowSize);
-        timeline.to($list, 0.2, { height: height }, "reflow");
+        height = ++rowCount * gutterStep + (++rowCount * rowSize) + gutterStep;
+        timeline.to($list, 0.5, { height: height }, "reflow");
     }
 }
