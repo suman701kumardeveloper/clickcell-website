@@ -1,37 +1,37 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - a ClickCell Systems design</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
+	<head>
+		<meta charset="utf-8"/>
+		<title>@ViewBag.Title - a ClickCell Systems design</title>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+		<meta name="viewport" content="width=device-width"/>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
-    <body>
-        <header>
-
-                <div id="clickcelllogo">
-                        <a href="/">
-                            <img src="~/Images/clickcellsystems.gif" />
-                        </a>
-                </div>
-            <div id="navigator">
-                <section id="login">
+	<body>
+		<header>
+			<div id="clickcelllogo">
+				<a href="/">
+					<img src="~/Images/clickcellsystems.gif"/>
+				</a>
+			</div>
+			<div id="navigator">
+				<section id="login">
                     @Html.Partial("_LoginPartial")
                 </section>
-            </div>
-            <br/>
-        </header>
-        <div id="body">
+			</div>
+		</header>
+		<div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>
-        </div>
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Harold Robson, all rights reserved</p>
-        </footer>
+		</div>
+	    <footer>
+            <div id="licence">
+	            <p>&copy; @DateTime.Now.Year - Harold Robson, all rights reserved<br/>Except otherwise specified</p>
+            </div>
+		</footer>
 
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
