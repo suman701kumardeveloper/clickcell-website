@@ -1,8 +1,8 @@
 ﻿//Forked from: http://codepen.io/osublake/pen/RNLdpz/ by Blake Bowen
 
 // GRID OPTIONS
-var rowSize = 100;
-var colSize = 100;
+var rowSize = 120;
+var colSize = 120;
 var gutter = 15;     // Spacing between tiles
 var numTiles = 8;    // Number of tiles to initially populate the grid with
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
@@ -229,11 +229,12 @@ function layoutInvalidated(rowToUpdate) {
         //first row is double height
         var offset = 0;
         var rowspan = 1;
-        if (row == 0) 
-            rowspan = 2;
-        else 
-            offset = 1;
-
+        var colspan = tile.colspan;
+        if (row == 0) {
+            rowspan = colspan = 2;
+        } else {
+            offset = rowspan = 1;
+        }
 
         $.extend(tile, {
             col: col,
@@ -241,11 +242,11 @@ function layoutInvalidated(rowToUpdate) {
             index: index,
             x: col * gutterStep + (col * colSize),
             y: (row + offset) * gutterStep + ((row + offset) * rowSize),
-            width: tile.colspan * colSize + ((tile.colspan - 1) * gutterStep),
+            width: colspan * colSize + ((colspan - 1) * gutterStep),
             height: rowspan * rowSize + (gutterStep * (rowspan-1))
         });
 
-        col += tile.colspan;
+        col += colspan;
 
         // If the tile being dragged is in bounds, set a new
         // last index in case it goes out of bounds
@@ -277,7 +278,7 @@ function layoutInvalidated(rowToUpdate) {
 
         // Don't animate the tile that is being dragged and
         // only animate the tiles that have changes
-        if (!tile.isDragging && (oldRow !== tile.row || oldCol !== tile.col)) {
+        if ((oldRow !== tile.row || oldCol !== tile.col)) {
 
             var duration = newTile ? 0 : time;
 
@@ -290,6 +291,8 @@ function layoutInvalidated(rowToUpdate) {
             timeline.to(element, duration, {
                 x: tile.x,
                 y: tile.y,
+				width: tile.width,
+				height: tile.height,
                 onComplete: function () { tile.positioned = true; },
                 onStart: function () { tile.positioned = false; }
             }, "reflow");
