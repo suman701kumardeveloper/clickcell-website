@@ -50,11 +50,10 @@ p {
 #navigator {
 	float: right;
     vertical-align: top;
-	color: #efefef;
 	margin-bottom: 15px;
-	line-height: 13px;
+	line-height: 100%;
 	font-weight: 100;
-	font-size: 50%;
+	font-size: 100%;
 }
 
 nav {
