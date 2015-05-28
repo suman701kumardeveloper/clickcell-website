@@ -22,7 +22,7 @@ h1 {
 
 p {
 	color: #efefef;
-	font-weight: 100;
+	font-weight: 700;
     font-size: 80%;
 	text-transform: uppercase;
 }
@@ -40,6 +40,7 @@ p {
 
 #licence {
     font-size: 70%;
+    font-weight: 100;
     position: fixed;
     bottom: 0;
     width: 100%;
