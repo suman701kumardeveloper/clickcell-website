@@ -1,12 +1,10 @@
 ﻿//Forked from: http://codepen.io/osublake/pen/RNLdpz/ by Blake Bowen
 
-// GRID OPTIONS
-var rowSize = 200;
-var colSize = 200;
-var gutter = 16;     // Spacing between tiles
+// GRID OPTIONS : most tiles will need to be 3:2
+var colSize = 180;
+var rowSize = (colSize / 3) * 2;
+var gutter = 15;     // Spacing between tiles
 var numTiles = 8;    // Number of tiles to initially populate the grid with
-var fixedSize = false; // When true, each tile's colspan will be fixed to 1
-var oneColumn = false; // When true, grid will only have 1 column and tiles have fixed colspan of 1
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
 
 var $add = $("#add");
@@ -19,15 +17,13 @@ var label = 1;
 var zIndex = 1000;
 
 var startWidth = "100%";
-var startSize = colSize;
-var singleWidth = colSize * 3;
 
 var colCount = null;
 var rowCount = null;
 var gutterStep = null;
 
 var shadow1 = "0 1px 3px  0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.6)";
-var shadow2 = "0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
+var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
 
 $(window).resize(resize);
 $add.click(createTile);
@@ -41,30 +37,6 @@ init();
 function init() {
 
     var width = startWidth;
-
-    // This value is defined when this function 
-    // is fired by a radio button change event
-    switch (this.value) {
-
-        case "mixed":
-            fixedSize = false;
-            oneColumn = false;
-            colSize = startSize;
-            break;
-
-        case "fixed":
-            fixedSize = true;
-            oneColumn = false;
-            colSize = startSize;
-            break;
-
-        case "column":
-            fixedSize = false;
-            oneColumn = true;
-            width = singleWidth;
-            colSize = singleWidth;
-            break;
-    }
 
     $(".tile").remove();
 
@@ -88,7 +60,7 @@ function init() {
 // ========================================================================
 function resize() {
 
-    colCount = oneColumn ? 1 : Math.floor($list.outerWidth() / (colSize + gutter));
+    colCount = Math.floor($list.outerWidth() / (colSize + gutter));
     gutterStep = colCount == 1 ? gutter : (gutter * (colCount - 1) / colCount);
     rowCount = 0;
 
@@ -115,7 +87,7 @@ function changePosition(from, to, rowToUpdate) {
 // ========================================================================
 function createTile() {
 
-    var colspan = fixedSize || oneColumn ? 1 : Math.floor(Math.random() * 2) + 1;
+    var colspan = Math.floor(Math.random() * 2) + 1;
     var element = $("<div></div>").addClass("tile").html(label++);
     var lastX = 0;
 
@@ -126,8 +98,6 @@ function createTile() {
         zIndexBoost: false
     });
 
-    // NOTE: Leave rowspan set to 1 because this demo 
-    // doesn't calculate different row heights
     var tile = {
         col: null,
         colspan: colspan,
@@ -158,10 +128,10 @@ function createTile() {
         tile.isDragging = true;
         tile.lastIndex = tile.index;
 
-        TweenLite.to(element, 0.2, {
+        TweenLite.to(element, 0.3, {          
             autoAlpha: 0.75,
             boxShadow: shadow2,
-            scale: 0.95,
+            scale: 1.1,
             zIndex: "+=1000"
         });
     }
@@ -229,7 +199,7 @@ function layoutInvalidated(rowToUpdate) {
     var height = 0;
     var col = 0;
     var row = 0;
-    var time = 0.35;
+    var time = 0.45;
 
     $(".tile").each(function (index, element) {
 
@@ -256,17 +226,27 @@ function layoutInvalidated(rowToUpdate) {
             col = 0; row++;
         }
 
+        //first row is double height
+        var rowspan;
+        var offset = 0;
+        var colspan = tile.colspan;
+        if (row == 0) 
+            rowspan = colspan = 2;
+        // all other rows will need an offset to accomodate
+        else 
+            offset = rowspan = 1;
+        
         $.extend(tile, {
             col: col,
             row: row,
             index: index,
             x: col * gutterStep + (col * colSize),
-            y: row * gutterStep + (row * rowSize),
-            width: tile.colspan * colSize + ((tile.colspan - 1) * gutterStep),
-            height: tile.rowspan * rowSize
+            y: (row + offset) * gutterStep + ((row + offset) * rowSize),
+            width: colspan * colSize + ((colspan - 1) * gutterStep),
+            height: rowspan * rowSize + (gutterStep * (rowspan-1))
         });
 
-        col += tile.colspan;
+        col += colspan;
 
         // If the tile being dragged is in bounds, set a new
         // last index in case it goes out of bounds
@@ -296,9 +276,8 @@ function layoutInvalidated(rowToUpdate) {
             timeline.fromTo(element, time, from, to, "reflow");
         }
 
-        // Don't animate the tile that is being dragged and
-        // only animate the tiles that have changes
-        if (!tile.isDragging && (oldRow !== tile.row || oldCol !== tile.col)) {
+        // animate tiles being dragged or during position change
+        if ((oldRow !== tile.row || oldCol !== tile.col)) {
 
             var duration = newTile ? 0 : time;
 
@@ -311,6 +290,8 @@ function layoutInvalidated(rowToUpdate) {
             timeline.to(element, duration, {
                 x: tile.x,
                 y: tile.y,
+				width: tile.width,
+				height: tile.height,
                 onComplete: function () { tile.positioned = true; },
                 onStart: function () { tile.positioned = false; }
             }, "reflow");
@@ -320,11 +301,8 @@ function layoutInvalidated(rowToUpdate) {
     // If the row count has changed, change the height of the container
     if (row !== rowCount) {
         rowCount = row;
-        height = rowCount * gutterStep + (++row * rowSize);
-        timeline.to($list, 0.2, { height: height }, "reflow");
+        // top row will be double height
+        height = ++rowCount * gutterStep + (++rowCount * rowSize) + gutterStep;
+        timeline.to($list, 0.5, { height: height }, "reflow");
     }
 }
-
-
-
-

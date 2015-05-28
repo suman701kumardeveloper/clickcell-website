@@ -1,14 +1,13 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-<div class="layout" hidden="">
-    <label><input id="mixed" name="layout" type="radio" value="mixed" checked=""/> Mixed Tile Size</label>
+<div id="welcomemessage">
+    <p>Drag images up and down to resize<br />
+    Drag off the page to remove<br />
+    Press the button to see a new image</p>
 </div>
-<p>Drag images up and down to resize</p>
-<p>Drag off the page to remove</p>
-<p>Press the button to see a new image</p>
 <button id="add">ANOTHER</button>
+
 <div id="list"></div>
 
 <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-6c99970ade81e43be51fa877be0f7600.js"></script>
