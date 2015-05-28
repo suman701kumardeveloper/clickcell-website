@@ -191,6 +191,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +256,7 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\clickcellsystems.gif" />
     <Content Include="Images\clickcellsystems.jpg" />
+    <Content Include="Images\stepper.jpg" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

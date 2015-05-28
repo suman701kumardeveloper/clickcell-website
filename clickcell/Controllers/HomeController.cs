@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using clickcell.Models;
 
 namespace clickcell.Controllers
 {
@@ -12,7 +9,16 @@ namespace clickcell.Controllers
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View();
+            string imageSet = "";
+            const string imagePath = "/Images/clickcellsystems.gif";
+
+            for (int i = 1; i <= 8; i++)
+            {
+                //imageSet += string.Format("<div class=\"image\" id=\"{1}\" path=\"{0}\">{1}</div>", imagePath, i);
+
+            }
+
+            return View(new HomePage(imageSet));
         }
 
         public ActionResult About()

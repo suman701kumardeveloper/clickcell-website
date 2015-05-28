@@ -287,6 +287,12 @@ function layoutInvalidated(rowToUpdate) {
                 timeline.set(element, { zIndex: ++zIndex }, "reflow");
             }
 
+            var img = document.createElement('img');
+            img.src = "/Images/stepper.jpg";
+            tile.appendChild(img);
+
+            //TweenLite.set(element, { backgroundImage: 'url(/Images/stepper.jpg)', scaleMode: "proportionalInside" });
+
             timeline.to(element, duration, {
                 x: tile.x,
                 y: tile.y,
