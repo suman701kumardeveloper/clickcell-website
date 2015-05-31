@@ -28,14 +28,15 @@ p {
 }
 
 #welcomemessage {
+	float: left;
         vertical-align: top;
+                margin-top: 0px;
 }
 
 #clickcelllogo {
 	float: left;
 	width: 200px;
-	margin-right: 40px;
-	margin-bottom: 40px;
+	margin-right: 30px;
 }
 
 #licence {
@@ -46,9 +47,17 @@ p {
     width: 100%;
 	display: block;
 }
-
+button {
+	padding: 13px 30px;
+	box-shadow: none;
+	border:thin;
+	color: #efefef;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.3);
+}
 #add {
-	 clear: both;
+	   margin-left: 30px;
+     margin-top: 12px;
 }
 
 #navigator {
@@ -75,32 +84,24 @@ a a:hover, a:visited, a:link, a:active {
 	line-height: 0px;
 }
 
-button {
-	padding: 12px 30px;
-	box-shadow: none;
-	border: none;
-	color: #efefef;
-	cursor: pointer;
-	background-color: rgba(0, 0, 0, 0.3);
-}
-
 button:hover {
 	background-color: rgba(0, 0, 0, 0.35);
 	color: yellowgreen;
 }
 
 button:focus {
-	outline: none;
+	outline: yellowgreen;
 }
 
 #list {
+    clear: right;
 	background-color: rgba(0, 0, 0, 0.2);
 	width: 250px;
 	width: 100%;
 	width: 0;
 	position: relative;
 	display: block;
-	margin-top: 15px;
+	margin-top: 0   px;
 }
 
 .tile {

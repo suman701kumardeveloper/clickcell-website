@@ -1,7 +1,7 @@
 ﻿//Forked from: http://codepen.io/osublake/pen/RNLdpz/ by Blake Bowen
 
 // GRID OPTIONS : most tiles will need to be 3:2
-var colSize = 180;
+var colSize = 255;
 var rowSize = (colSize / 3) * 2;
 var gutter = 15;     // Spacing between tiles
 var numTiles = 8;    // Number of tiles to initially populate the grid with
@@ -13,7 +13,7 @@ var $mode = $("input[name='layout']");
 
 // Live node list of tiles
 var tiles = $list[0].getElementsByClassName("tile");
-var label = 1;
+var tileIndex = 1;
 var zIndex = 1000;
 
 var startWidth = "100%";
@@ -45,7 +45,7 @@ function init() {
 
     function populateBoard() {
 
-        label = 1;
+        tileIndex = 1;
         resize();
 
         for (var i = 0; i < numTiles; i++) {
@@ -53,7 +53,6 @@ function init() {
         }
     }
 }
-
 
 // ========================================================================
 //  RESIZE
@@ -66,7 +65,6 @@ function resize() {
 
     layoutInvalidated();
 }
-
 
 // ========================================================================
 //  CHANGE POSITION
@@ -88,7 +86,8 @@ function changePosition(from, to, rowToUpdate) {
 function createTile() {
 
     var colspan = Math.floor(Math.random() * 2) + 1;
-    var element = $("<div></div>").addClass("tile").html(label++);
+    var imageLocator = "";
+    var element = $("<div></div>").addClass("tile").html(imageLocator);
     var lastX = 0;
 
     Draggable.create(element, {
