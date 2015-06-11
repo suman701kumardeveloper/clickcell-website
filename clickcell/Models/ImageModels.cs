@@ -13,10 +13,11 @@ namespace clickcell.Models
     {
         public int ID { get; set; }
         public int ViewCount { get; set; }
-        public int ExpandedViewCount { get; set; }
+        public int FullViewCount { get; set; }
         public int HideCount { get; set; }
         public string Title { get; set; }
         public string URI { get; set; }
+        public string FullViewURI { get; set; }
         public DateTime ReleaseDate { get; set; }
         public List<int> CategoryIDs { get; set; }
     }

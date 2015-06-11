@@ -44,12 +44,31 @@ function init() {
     TweenLite.delayedCall(0.25, populateBoard);
 
     function populateBoard() {
-
         tileIndex = 1;
         resize();
 
+        var xmlhttp;
+        var nodes;
+
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                nodes = xmlhttp.responseXML//.documentElement("ArrayOfImage").getElementsByTagName("Image");
+            }
+        }
+        xmlhttp.open("GET", "api/images", true);
+        xmlhttp.send();
+
+
+
         for (var i = 0; i < numTiles; i++) {
-            createTile();
+            createTile(nodes[i].getElementByTagName("URI").nodeValue);
         }
     }
 }
@@ -83,11 +102,10 @@ function changePosition(from, to, rowToUpdate) {
 // ========================================================================
 //  CREATE TILE
 // ========================================================================
-function createTile() {
+function createTile(uri) {
 
     var colspan = Math.floor(Math.random() * 2) + 1;
-    var imageLocator = "";
-    var element = $("<div></div>").addClass("tile").html(imageLocator);
+    var element = $("<div></div>").addClass("tile").html("<img src='" + uri + "'/>");
     var lastX = 0;
 
     Draggable.create(element, {

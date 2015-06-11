@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
+using clickcell.Models;
 
 namespace clickcell.Controllers
 {
@@ -14,9 +16,31 @@ namespace clickcell.Controllers
         // GET api/images
         //if you do a get request to root + api/images it will hit this method and return wahtever the method returns if you say you want xml it will return xml if you say json you get json
         // www.clickcell.co.uk/api/images
-        public IEnumerable<string> Get()
+        public IEnumerable<Image> Get()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<string> sessionGuid;
+            Request.Headers.TryGetValues("SessionID", out sessionGuid);
+            // if client doesnt have a GUID for their session, 
+            // give them one and return 8 random images to kick off the session
+            
+            // if they do have a GUUID, then session is in progress
+            // give them one random image that they haven't seen already
+
+            var testImage = new Image
+            {
+                ID = 1,
+                ViewCount = 0,
+                FullViewCount = 0,
+                HideCount = 0,
+                Title = "Test Image",
+                URI = "http://www.clickcell.co.uk/images/clickcellsystems.jpg",
+                FullViewURI = "",
+                ReleaseDate = DateTime.Today,
+                CategoryIDs = new List<int>()
+            };
+
+            return new[] { testImage, testImage, testImage, testImage, testImage, testImage, testImage, testImage };
+
         }
 
         // GET api/images/5
