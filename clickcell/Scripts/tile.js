@@ -47,29 +47,20 @@ function init() {
         tileIndex = 1;
         resize();
 
-        var xmlhttp;
-        var nodes;
-
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        }
-        else {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                nodes = xmlhttp.responseXML//.documentElement("ArrayOfImage").getElementsByTagName("Image");
-            }
-        }
-        xmlhttp.open("GET", "api/images", true);
-        xmlhttp.send();
-
-
-
-        for (var i = 0; i < numTiles; i++) {
-            createTile(nodes[i].getElementByTagName("URI").nodeValue);
-        }
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "api/images",
+                dataType: "xml",
+                success: function (xml) {
+                    //console.log(xml);
+                    $(xml).find("URI").each(function () {
+                        createTile($(this).text());
+                        //console.log("Image: " + $(this).text());
+                    });
+                }
+            });
+        });
     }
 }
 
