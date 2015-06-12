@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Http;
 using clickcell.Models;
 
@@ -18,14 +19,6 @@ namespace clickcell.Controllers
         // www.clickcell.co.uk/api/images
         public IEnumerable<Image> Get()
         {
-            IEnumerable<string> sessionGuid;
-            Request.Headers.TryGetValues("SessionID", out sessionGuid);
-            // if client doesnt have a GUID for their session, 
-            // give them one and return 8 random images to kick off the session
-            
-            // if they do have a GUUID, then session is in progress
-            // give them one random image that they haven't seen already
-
             var testImage = new Image
             {
                 ID = 1,
@@ -38,9 +31,19 @@ namespace clickcell.Controllers
                 ReleaseDate = DateTime.Today,
                 CategoryIDs = new List<int>()
             };
+            
+            // if client has a GUUID, then session is in progress
+            // give them one random image that they haven't seen already
+            if (HttpContext.Current.Request.Headers.GetValues("SessionID") != null)
+            {
+                return new[] { testImage};    
+            }
+
+            // if client doesnt have a GUID for their session, 
+            // give them one and return 8 random images to kick off the session
+            HttpContext.Current.Response.AppendHeader("SessionID", Guid.NewGuid().ToString());
 
             return new[] { testImage, testImage, testImage, testImage, testImage, testImage, testImage, testImage };
-
         }
 
         // GET api/images/5

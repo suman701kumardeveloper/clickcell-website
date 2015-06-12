@@ -10,6 +10,7 @@ var threshold = "50%"; // This is amount of overlap between tiles needed to dete
 var $add = $("#add");
 var $list = $("#list");
 var $mode = $("input[name='layout']");
+var sessionId = null;
 
 // Live node list of tiles
 var tiles = $list[0].getElementsByClassName("tile");
@@ -26,7 +27,7 @@ var shadow1 = "0 1px 3px  0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.6)";
 var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
 
 $(window).resize(resize);
-$add.click(createTile);
+$add.click(newImage);
 $mode.change(init);
 
 init();
@@ -53,6 +54,8 @@ function init() {
                 url: "api/images",
                 dataType: "xml",
                 success: function (xml) {
+                    // get the session ID 
+                    sessionId = $(xml).find("SessionId");
                     //console.log(xml);
                     $(xml).find("URI").each(function () {
                         createTile($(this).text());
@@ -88,6 +91,24 @@ function changePosition(from, to, rowToUpdate) {
     $tiles.eq(from)[insert]($tiles.eq(to));
 
     layoutInvalidated(rowToUpdate);
+}
+
+
+// ========================================================================
+//  NEW IMAGE
+// ========================================================================
+function newImage() {
+        $.ajax({
+            type: "GET",
+            headers: {'sessionID':sessionId},
+            url: "api/images",
+            dataType: "xml",
+            success: function (xml) {
+                $(xml).find("URI").each(function () {
+                    createTile($(this).text());
+                });
+            }
+        });
 }
 
 // ========================================================================
