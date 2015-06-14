@@ -36,8 +36,9 @@ p {
     font-weight: 100;
     position: fixed;
     bottom: 0;
-    width: 100%;
 	display: block;
+    text-shadow: 1px 1px 3px #000000 ;
+    z-index: 50000;
 }
 button {
 	padding: 13px 30px;
