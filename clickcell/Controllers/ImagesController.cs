@@ -44,7 +44,7 @@ namespace clickcell.Controllers
 
                 if (count > 4){
                     var r = new Random();
-                    return new[] { TestImageGenerator(r.Next(8))};    
+                    return new[] { TestImageGenerator(r.Next(7)+1)};    
                 }
                 else
                     return new[] { TestImageGenerator(4+count) };    
