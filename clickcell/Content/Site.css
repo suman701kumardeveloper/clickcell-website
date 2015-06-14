@@ -19,19 +19,51 @@ p {
     color: #efefef;
     font-weight: 700;
     font-size: 80%;
-    text-transform: uppercase;
 }
-#welcomemessage {
-	float: left;
-    vertical-align: top;
-    margin-top: 0px;
-}
+
 #clickcelllogo {
-	float: left;
+	position: relative; top: 0px;
 	width: 200px;
-	margin-right: 30px;
+	border-right: 15px;
+    overflow:auto;
+}
+#welcomemessage
+{
+    width: 100%;
+    margin-bottom: 0px;
+}
+#message{
+    margin-left: 215px;
+    position: absolute; top: -4px;
+    font-family: Georgia, Serif;
+    text-shadow: 1px 1px 2px #000000 ;
+	font-size: 20px;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: 100;
+	line-height: 20px;
+    white-space: nowrap;
+}
+button {
+        font-family: Georgia, Serif;
+    text-shadow: 1px 1px 2px #000000 ;
+	font-size: 20px;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: 100;
+	line-height: 30px;
+    position: absolute; top: 20px;
+    margin-left: 315px;
+    white-space: nowrap;
+    float: left;
+	padding: 15px 15px;
+	box-shadow: none;
+	border:thin;
+	color: #efefef;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 #licence {
+    text-transform: uppercase;
     font-size: 70%;
     font-weight: 100;
     position: fixed;
@@ -40,18 +72,7 @@ p {
     text-shadow: 1px 1px 3px #000000 ;
     z-index: 50000;
 }
-button {
-	padding: 13px 30px;
-	box-shadow: none;
-	border:thin;
-	color: #efefef;
-	cursor: pointer;
-	background-color: rgba(0, 0, 0, 0.3);
-}
-#add {
-	 margin-left: 30px;
-     margin-top: 12px;
-}
+
 #navigator {
 	float: right;
     vertical-align: top;
@@ -74,10 +95,10 @@ a a:hover, a:visited, a:link, a:active {
 }
 button:hover {
 	background-color: rgba(0, 0, 0, 0.35);
-	color: yellowgreen;
+	color: yellow;
 }
 button:focus {
-	outline: yellowgreen;
+	outline: yellow;
 }
 #list {
     clear: right;
@@ -85,7 +106,6 @@ button:focus {
 	width: 100%;
 	position: relative;
 	display: block;
-	margin-top: 18px;
 }
 .tile {
 	display: block;
