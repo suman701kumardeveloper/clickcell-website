@@ -259,6 +259,9 @@
     <Content Include="Images\clickcellsystems.gif" />
     <Content Include="Images\clickcellsystems.jpg" />
     <Content Include="Images\testimage1.jpg" />
+    <Content Include="Images\testimage2.jpg" />
+    <Content Include="Images\testimage3.jpg" />
+    <Content Include="Images\testimage4.jpg" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
