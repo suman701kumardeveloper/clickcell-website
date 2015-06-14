@@ -15,6 +15,7 @@ var sessionId = null;
 var tiles = $list[0].getElementsByClassName("tile");
 var tileIndex = 1;
 var zIndex = 1000;
+var count = 0;
 
 var startWidth = "100%";
 
@@ -97,9 +98,10 @@ function changePosition(from, to, rowToUpdate) {
 //  NEW IMAGE
 // ========================================================================
 function newImage() {
+    count++;
         $.ajax({
             type: "GET",
-            headers: {'sessionID':sessionId},
+            headers: { 'sessionID': sessionId, 'count': count },
             url: "api/images",
             dataType: "xml",
             success: function (xml) {

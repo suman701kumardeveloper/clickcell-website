@@ -36,13 +36,18 @@ namespace clickcell.Controllers
         public IEnumerable<Image> Get()
         {
 
-
-            
             // if client has a GUUID, then session is in progress
             // give them one random image that they haven't seen already
             if (HttpContext.Current.Request.Headers.GetValues("SessionID") != null)
             {
-                return new[] { TestImageGenerator(1) };    
+                int count = Convert.ToInt32(HttpContext.Current.Request.Headers.GetValues("count")[0]);
+
+                if (count > 4){
+                    var r = new Random();
+                    return new[] { TestImageGenerator(r.Next(8))};    
+                }
+                else
+                    return new[] { TestImageGenerator(4+count) };    
             }
 
             // if client doesnt have a GUID for their session, 
