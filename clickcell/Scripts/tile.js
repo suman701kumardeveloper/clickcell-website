@@ -4,7 +4,6 @@
 var colSize = 255;
 var rowSize = (colSize / 3) * 2;
 var gutter = 15;     // Spacing between tiles
-var numTiles = 8;    // Number of tiles to initially populate the grid with
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
 
 var $add = $("#add");
@@ -55,7 +54,7 @@ function init() {
                 dataType: "xml",
                 success: function (xml) {
                     // get the session ID 
-                    sessionId = $(xml).find("SessionId");
+                    //sessionId = 
                     //console.log(xml);
                     $(xml).find("URI").each(function () {
                         createTile($(this).text());
@@ -158,7 +157,7 @@ function createTile(uri) {
         tile.lastIndex = tile.index;
 
         TweenLite.to(element, 0.3, {          
-            autoAlpha: 0.75,
+            autoAlpha: 0.72,
             boxShadow: shadow2,
             scale: 1.1,
             zIndex: "+=1000"

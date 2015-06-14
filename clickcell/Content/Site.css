@@ -1,44 +1,36 @@
 ﻿html {
 	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
 }
-
 body {
-
     background: #3A3A4D;
 	margin: 15px;
 	padding: 0px;
 }
-
 *, *:before, *:after {
 	box-sizing: border-box;
 }
-
 h1 {
-	color: #efefef;
-	font-weight: normal;
-	font-weight: 300;
-	margin-bottom: 30px;
+    color: #efefef;
+    font-weight: normal;
+    font-weight: 300;
+    margin-bottom: 30px;
 }
-
 p {
-	color: #efefef;
-	font-weight: 700;
+    color: #efefef;
+    font-weight: 700;
     font-size: 80%;
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
-
 #welcomemessage {
 	float: left;
-        vertical-align: top;
-                margin-top: 0px;
+    vertical-align: top;
+    margin-top: 0px;
 }
-
 #clickcelllogo {
 	float: left;
 	width: 200px;
 	margin-right: 30px;
 }
-
 #licence {
     font-size: 70%;
     font-weight: 100;
@@ -56,10 +48,9 @@ button {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 #add {
-	   margin-left: 30px;
+	 margin-left: 30px;
      margin-top: 12px;
 }
-
 #navigator {
 	float: right;
     vertical-align: top;
@@ -68,69 +59,65 @@ button {
 	font-weight: 100;
 	font-size: 100%;
 }
-
 nav {
 	line-height: 0px;
 }
-
 a:hover {
 	color: yellowgreen;
 	border-color: yellowgreen;
 }
-
 a a:hover, a:visited, a:link, a:active {
 	color: #efefef;
 	text-decoration: none;
 	line-height: 0px;
 }
-
 button:hover {
 	background-color: rgba(0, 0, 0, 0.35);
 	color: yellowgreen;
 }
-
 button:focus {
 	outline: yellowgreen;
 }
-
 #list {
     clear: right;
 	background-color: rgba(0, 0, 0, 0.2);
-	width: 250px;
 	width: 100%;
-	width: 0;
 	position: relative;
 	display: block;
-	margin-top: 0   px;
+	margin-top: 0px;
 }
-
 .tile {
 	display: block;
 	position: absolute;
-	background-color: yellowgreen;
-	color: #3A3A4D;
-	padding: 5px;
-	font-weight: bold;
+    overflow: hidden; 
+	background-color: grey;
+	padding: 0px;
 }
-
+.tile img {
+    position: absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto; 
+    width: 100%;
+    height: auto;
+    vertical-align: middle
+}
 .layout {
 	color: #efefef;
 	margin-bottom: 15px;
 }
-
 .layout label {
 	margin-right: 15px;
 	cursor: pointer;
 }
-
 .layout label:hover {
 	color: yellowgreen;
 }
-
 .layout input {
 	margin-right: 3px;
 }
-
 #menu {
 	color: #efefef;
 	margin-bottom: 15px;

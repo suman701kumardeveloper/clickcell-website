@@ -14,36 +14,42 @@ namespace clickcell.Controllers
         //you can POST it to an URL, and let the server decide the actual URL.
         //- See more at: http://restcookbook.com/HTTP%20Methods/put-vs-post/#sthash.kkHaAmrh.dpuf
 
+        public Image TestImageGenerator(int index)
+        {
+            return new Image
+            {
+                ID = index,
+                ViewCount = 0,
+                FullViewCount = 0,
+                HideCount = 0,
+                Title = "Test Image",
+                URI = String.Format("images/testimage{0}.jpg", index),
+                FullViewURI = "",
+                ReleaseDate = DateTime.Today,
+                CategoryIDs = new List<int>()
+            };
+        }
+
         // GET api/images
         //if you do a get request to root + api/images it will hit this method and return wahtever the method returns if you say you want xml it will return xml if you say json you get json
         // www.clickcell.co.uk/api/images
         public IEnumerable<Image> Get()
         {
-            var testImage = new Image
-            {
-                ID = 1,
-                ViewCount = 0,
-                FullViewCount = 0,
-                HideCount = 0,
-                Title = "Test Image",
-                URI = "http://www.clickcell.co.uk/images/clickcellsystems.jpg",
-                FullViewURI = "",
-                ReleaseDate = DateTime.Today,
-                CategoryIDs = new List<int>()
-            };
+
+
             
             // if client has a GUUID, then session is in progress
             // give them one random image that they haven't seen already
             if (HttpContext.Current.Request.Headers.GetValues("SessionID") != null)
             {
-                return new[] { testImage};    
+                return new[] { TestImageGenerator(1) };    
             }
 
             // if client doesnt have a GUID for their session, 
             // give them one and return 8 random images to kick off the session
             HttpContext.Current.Response.AppendHeader("SessionID", Guid.NewGuid().ToString());
 
-            return new[] { testImage, testImage, testImage, testImage, testImage, testImage, testImage, testImage };
+            return new[] { TestImageGenerator(1), TestImageGenerator(2), TestImageGenerator(3), TestImageGenerator(4), };
         }
 
         // GET api/images/5
