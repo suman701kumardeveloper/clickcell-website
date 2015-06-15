@@ -42,9 +42,9 @@ namespace clickcell.Controllers
             {
                 int count = Convert.ToInt32(HttpContext.Current.Request.Headers.GetValues("count")[0]);
 
-                if (count > 4){
+                if (count > (12-4)){
                     var r = new Random();
-                    return new[] { TestImageGenerator(r.Next(7)+1)};    
+                    return new[] { TestImageGenerator(r.Next(11)+1)};    
                 }
                 else
                     return new[] { TestImageGenerator(4+count) };    
