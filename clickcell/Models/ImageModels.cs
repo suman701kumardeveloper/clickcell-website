@@ -18,6 +18,8 @@ namespace clickcell.Models
         public string Title { get; set; }
         public string URI { get; set; }
         public string FullViewURI { get; set; }
+        public bool FullViewAvailable { get; set; }
+        public bool MandatoryCropping { get; set; }
         public DateTime ReleaseDate { get; set; }
         public List<int> CategoryIDs { get; set; }
     }

@@ -35,6 +35,7 @@ namespace clickcell.Controllers
         // www.clickcell.co.uk/api/images
         public IEnumerable<Image> Get()
         {
+            const int initialImageCount = 5;
 
             // if client has a GUUID, then session is in progress
             // give them one random image that they haven't seen already
@@ -42,19 +43,24 @@ namespace clickcell.Controllers
             {
                 int count = Convert.ToInt32(HttpContext.Current.Request.Headers.GetValues("count")[0]);
 
-                if (count > (12-4)){
+                if (count > (12 - initialImageCount))
+                {
                     var r = new Random();
                     return new[] { TestImageGenerator(r.Next(11)+1)};    
                 }
                 else
-                    return new[] { TestImageGenerator(4+count) };    
+                    return new[] { TestImageGenerator(initialImageCount + count) };    
             }
 
             // if client doesnt have a GUID for their session, 
-            // give them one and return 8 random images to kick off the session
+            // give them one and return x random images to kick off the session
             HttpContext.Current.Response.AppendHeader("SessionID", Guid.NewGuid().ToString());
-
-            return new[] { TestImageGenerator(1), TestImageGenerator(2), TestImageGenerator(3), TestImageGenerator(4), };
+            var imageList = new List<Image>();
+            for (int i = 1; i <= initialImageCount; i++)
+            {
+                imageList.Add(TestImageGenerator(i));
+            }
+            return imageList;
         }
 
         // GET api/images/5
