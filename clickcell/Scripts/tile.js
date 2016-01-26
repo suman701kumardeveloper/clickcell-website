@@ -17,7 +17,7 @@ var tileIndex = 1;
 var zIndex = 1000;
 var count = 0;
 
-var startWidth = "100%";
+var startWidth = Math.floor(window.innerWidth / (colSize + gutter)) * (colSize + gutter); 
 
 var colCount = null;
 var rowCount = null;
@@ -72,7 +72,7 @@ function init() {
 // ========================================================================
 function resize() {
 
-    colCount = Math.floor($list.outerWidth() / (colSize + gutter));
+    colCount = Math.floor($list.innerWidth() / (colSize + gutter));
     gutterStep = colCount == 1 ? gutter : (gutter * (colCount - 1) / colCount);
     rowCount = 0;
 
@@ -107,6 +107,8 @@ function newImage() {
             success: function (xml) {
                 $(xml).find("URI").each(function () {
                     createTile($(this).text());
+                    //put new tile first
+                    changePosition(tiles.length-1, 0);
                 });
             }
         });
@@ -256,7 +258,7 @@ function layoutInvalidated(rowToUpdate) {
             col = 0; row++;
         }
 
-        //first row is double height
+        //first row is double height (and columns are double width regardless of tile setting)
         var rowspan;
         var offset = 0;
         var colspan = tile.colspan;
