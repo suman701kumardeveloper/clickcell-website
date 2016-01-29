@@ -1,27 +1,19 @@
 ﻿//Forked from: http://codepen.io/osublake/pen/RNLdpz/ by Blake Bowen
 
 // GRID OPTIONS : most tiles will need to be 3:2
-var colSize = 255;
+var colSize = 262;
 var rowSize = (colSize / 3) * 2;
 var gutter = 15;     // Spacing between tiles
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
-
 var $add = $("#add");
 var $list = $("#list");
 var $mode = $("input[name='layout']");
-var sessionId = null;
-
 // Live node list of tiles
 var tiles = $list[0].getElementsByClassName("tile");
 var tileIndex = 1;
 var zIndex = 1000;
 var count = 0;
-
-var startWidth = "100%";
-
-var colCount = null;
-var rowCount = null;
-var gutterStep = null;
+var colCount = rowCount = gutterStep = sessionId = null;
 
 var shadow1 = "0 1px 3px  0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.6)";
 var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
@@ -29,7 +21,7 @@ var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)"
 $(window).resize(resize);
 $add.click(newImage);
 $mode.change(init);
-
+var startWidth = Math.floor(window.innerWidth / (colSize * 2 + gutter)) * (colSize * 2 + gutter) + gutter * 3;
 init();
 
 // ========================================================================
@@ -72,7 +64,7 @@ function init() {
 // ========================================================================
 function resize() {
 
-    colCount = Math.floor($list.outerWidth() / (colSize + gutter));
+    colCount = Math.floor($list.innerWidth() / (colSize + gutter));
     gutterStep = colCount == 1 ? gutter : (gutter * (colCount - 1) / colCount);
     rowCount = 0;
 
@@ -107,6 +99,8 @@ function newImage() {
             success: function (xml) {
                 $(xml).find("URI").each(function () {
                     createTile($(this).text());
+                    //put new tile first
+                    changePosition(tiles.length-1, 0);
                 });
             }
         });
@@ -256,7 +250,7 @@ function layoutInvalidated(rowToUpdate) {
             col = 0; row++;
         }
 
-        //first row is double height
+        //first row is double height (and columns are double width regardless of tile setting)
         var rowspan;
         var offset = 0;
         var colspan = tile.colspan;
