@@ -1,5 +1,5 @@
 ﻿html {
-	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+	font-family: Georgia, Serif;
 }
 body {
     background: #3A3A4D;
@@ -17,8 +17,6 @@ h1 {
 }
 p {
     color: #efefef;
-    font-weight: 700;
-    font-size: 80%;
 }
 
 #clickcelllogo {
@@ -27,13 +25,9 @@ p {
 	border-right: 15px;
     overflow:auto;
 }
-#welcomemessage
-{
-    width: 100%;
-    margin-bottom: 0px;
-}
+
 #message{
-    margin-left: 215px;
+    margin-left: 360px;
     position: absolute; top: -4px;
     font-family: Georgia, Serif;
     text-shadow: 1px 1px 2px #000000 ;
@@ -45,31 +39,27 @@ p {
     white-space: nowrap;
 }
 button {
-        font-family: Georgia, Serif;
-    text-shadow: 1px 1px 2px #000000 ;
+    margin-left: 215px;
 	font-size: 20px;
-	font-style: italic;
-	font-variant: normal;
-	font-weight: 100;
-	line-height: 30px;
+	font-family: Georgia, Serif;   
+	line-height: 26px;
     position: absolute; top: 20px;
-    margin-left: 315px;
     white-space: nowrap;
     float: left;
 	padding: 15px 15px;
-	box-shadow: none;
-	border:thin;
-	color: #efefef;
-	background-color: rgba(0, 0, 0, 0.3);
 }
 #licence {
     text-transform: uppercase;
-    font-size: 70%;
-    font-weight: 100;
+	font-family: 'Arial Narrow', Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 100;
+	line-height: 0;
     position: fixed;
-    bottom: 0;
-	display: block;
-    text-shadow: 1px 1px 3px #000000 ;
+    bottom: 0px;
+	display: inline-block;
+  background-color: black;
     z-index: 50000;
 }
 
@@ -86,7 +76,7 @@ nav {
 }
 a:hover {
 	color: yellowgreen;
-	border-color: yellowgreen;
+	border-color: yellow;
 }
 a a:hover, a:visited, a:link, a:active {
 	color: #efefef;
@@ -94,18 +84,19 @@ a a:hover, a:visited, a:link, a:active {
 	line-height: 0px;
 }
 button:hover {
-	background-color: rgba(0, 0, 0, 0.35);
-	color: yellow;
+	background-color: rgba(0, 0, 0, 0.2);
+    color: #efefef;
 }
-button:focus {
-	outline: yellow;
-}
+
 #list {
     clear: right;
 	background-color: rgba(0, 0, 0, 0.2);
 	width: 100%;
 	position: relative;
 	display: block;
+    border: dashed;
+    border-color: lightblue;
+    border-width:1px;
 }
 .tile {
 	display: block;

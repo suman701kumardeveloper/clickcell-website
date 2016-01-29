@@ -1,27 +1,19 @@
 ﻿//Forked from: http://codepen.io/osublake/pen/RNLdpz/ by Blake Bowen
 
 // GRID OPTIONS : most tiles will need to be 3:2
-var colSize = 255;
+var colSize = 262;
 var rowSize = (colSize / 3) * 2;
 var gutter = 15;     // Spacing between tiles
 var threshold = "50%"; // This is amount of overlap between tiles needed to detect a collision
-
 var $add = $("#add");
 var $list = $("#list");
 var $mode = $("input[name='layout']");
-var sessionId = null;
-
 // Live node list of tiles
 var tiles = $list[0].getElementsByClassName("tile");
 var tileIndex = 1;
 var zIndex = 1000;
 var count = 0;
-
-var startWidth = Math.floor(window.innerWidth / (colSize + gutter)) * (colSize + gutter); 
-
-var colCount = null;
-var rowCount = null;
-var gutterStep = null;
+var colCount = rowCount = gutterStep = sessionId = null;
 
 var shadow1 = "0 1px 3px  0 rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.6)";
 var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)";
@@ -29,7 +21,7 @@ var shadow2 = "0 20px 20px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2)"
 $(window).resize(resize);
 $add.click(newImage);
 $mode.change(init);
-
+var startWidth = Math.floor(window.innerWidth / (colSize * 2 + gutter)) * (colSize * 2 + gutter) + gutter * 3;
 init();
 
 // ========================================================================
